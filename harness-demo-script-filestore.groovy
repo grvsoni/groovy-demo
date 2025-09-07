@@ -128,7 +128,7 @@ try {
     echo "\n📋 Step 5: Final Configuration Summary:"
     echo "  • App Name: ${config.appName ?: 'N/A'}"
     echo "  • Environment: ${config.environment ?: 'N/A'}"
-    echo "  • Greeting: ${config.greeting ?: 'N/A'}"
+    echo "  • Greetingsssssss: ${config.greeting ?: 'N/A'}"
     echo "  • Build Tool: ${config.buildTool ?: 'N/A'}"
     echo "  • Test Command: ${config.testCommand ?: 'N/A'}"
     echo "  • Timeout: ${config.timeout ?: 'N/A'} seconds"
@@ -136,7 +136,7 @@ try {
     
     // 6. Execute the test (simulated)
     echo "\n🧪 Step 6: Executing Test..."
-    echo "Greeting: ${config.greeting}"
+    echo "Greetingsssssss: ${config.greeting}"
     echo "Running: ${config.testCommand ?: 'default test command'}"
     echo "Environment: ${config.environment}"
     
