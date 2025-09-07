@@ -123,7 +123,8 @@ def call(Map args) {
         
         if (config.outputFormat == "json") {
             echo "JSON Output:"
-            echo writeJSON returnText: true, json: output
+            def jsonOutput = writeJSON returnText: true, json: output
+            echo jsonOutput
         }
         
         // 8. Send notifications
