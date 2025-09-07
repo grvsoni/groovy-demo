@@ -21,7 +21,7 @@ groovy demoScript.groovy backend unit-tests service-test greeting="Custom Hello!
 
 - `jenkins-shared-library/resources/jctr/global.yml` - Global configuration from shared library
 - `teams/*/markup.yml` - Team-specific configurations
-- `README_DEMO.md` - Detailed documentation
+- `JENKINS_SHARED_LIBRARY_SETUP.md` - Complete setup guide
 
 ## Features
 
