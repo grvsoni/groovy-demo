@@ -32,9 +32,28 @@ def call(Map args) {
     try {
         // 1. Load global configuration from shared library
         echo "\n📚 Step 1: Loading global configuration from shared library..."
-        def globalConfig = readYaml text: libraryResource('jctr/global.yml')
-        def globalInfo = globalConfig.GLOBAL_SETTINGS ?: [:]
-        echo "✅ Global configuration loaded successfully"
+        def globalInfo = [:]
+        try {
+            def globalConfigText = libraryResource('jctr/global.yml')
+            echo "📄 Global config file loaded, parsing YAML..."
+            def globalConfig = readYaml text: globalConfigText
+            globalInfo = globalConfig.GLOBAL_SETTINGS ?: [:]
+            echo "✅ Global configuration loaded successfully"
+        } catch (Exception e) {
+            echo "⚠️ Warning: Could not load global config from shared library: ${e.message}"
+            echo "📝 Using default global configuration..."
+            globalInfo = [
+                greeting: "Hello",
+                environment: "development",
+                logLevel: "INFO",
+                timeout: 30,
+                enableNotifications: true,
+                emailFrom: "jenkins@company.com",
+                emailSubject: "Build Notification: \${appName}",
+                outputFormat: "json",
+                includeTimestamp: true
+            ]
+        }
         
         // 2. Load team configuration from repository
         echo "\n👥 Step 2: Loading team configuration for: ${team}"
