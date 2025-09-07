@@ -121,15 +121,24 @@ pipeline {
                         customParams.environment = params.CUSTOM_ENVIRONMENT
                     }
                     
-                    // Call the shared library step
-                    def result = demoScript(
-                        team: params.TEAM,
-                        suite: params.SUITE,
-                        test: params.TEST,
-                        customParams: customParams
-                    )
-                    
-                    echo "✅ Demo script completed with status: ${result.status}"
+                    // Call the shared library step with error handling
+                    try {
+                        def result = demoScript(
+                            team: params.TEAM ?: 'frontend',
+                            suite: params.SUITE ?: 'ui-tests',
+                            test: params.TEST ?: 'smoke-test',
+                            customParams: customParams
+                        )
+                        
+                        if (result && result.status) {
+                            echo "✅ Demo script completed with status: ${result.status}"
+                        } else {
+                            echo "✅ Demo script completed successfully"
+                        }
+                    } catch (Exception e) {
+                        echo "❌ Demo script execution failed: ${e.message}"
+                        throw e
+                    }
                 }
             }
         }
@@ -276,12 +285,31 @@ You can use multiple shared libraries:
    - Verify the GitHub repository URL is correct
    - Ensure the repository is accessible
 
-2. **Configuration not loading**
+2. **Jenkins loading old version of shared library (MOST COMMON)**
+   - **Symptoms**: Old output format, missing features, `NullPointerException`
+   - **Solution**: Clear Jenkins shared library cache:
+     1. Go to "Manage Jenkins" → "Script Console"
+     2. Run this script:
+     ```groovy
+     // Clear shared library cache
+     System.setProperty("org.jenkinsci.plugins.workflow.libs.LibraryAdder.DISABLE_CACHE", "true")
+     Jenkins.instance.reload()
+     println "Shared library cache cleared"
+     ```
+     3. Or restart Jenkins completely
+     4. Try your build again
+
+3. **Parameters coming through as null**
+   - **Symptoms**: `suite:null` in logs, parameter errors
+   - **Solution**: Use the updated Jenkinsfile with default values and error handling
+   - **Check**: Ensure all pipeline parameters are correctly configured
+
+4. **Configuration not loading**
    - Check that `jenkins-shared-library/resources/jctr/global.yml` exists
    - Verify YAML syntax is correct
    - Check Jenkins logs for detailed errors
 
-3. **Team configuration not found**
+5. **Team configuration not found**
    - Ensure `teams/{team}/markup.yml` files exist in your repository
    - Check that the team name parameter matches the directory name
 
