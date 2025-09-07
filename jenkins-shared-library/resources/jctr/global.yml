@@ -1,0 +1,23 @@
+GLOBAL_SETTINGS:
+  # Global defaults for all teams and environments
+  greeting: "Hello"
+  environment: "development"
+  logLevel: "INFO"
+  timeout: 30
+  enableNotifications: true
+  
+  # Email settings
+  emailFrom: "jenkins@company.com"
+  emailSubject: "Build Notification: ${appName}"
+  
+  # Git settings
+  defaultBranch: "main"
+  credentialsId: "git-credentials"
+  
+  # Output settings
+  outputFormat: "json"
+  includeTimestamp: true
+  
+  # Jenkins shared library specific settings
+  jctrBranch: "main"
+  sharedLibraryVersion: "1.0.0"
