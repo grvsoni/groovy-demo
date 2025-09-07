@@ -15,7 +15,21 @@ The Jenkins Shared Library approach provides:
 
 - Jenkins instance with admin access
 - Your GitHub repository: `https://github.com/grvsoni/groovy-demo.git`
-- Jenkins plugins: `Pipeline: Groovy`, `Git`, `Pipeline: Stage View`
+- **Required Jenkins plugins**:
+  - `Pipeline: Groovy` (usually pre-installed)
+  - `Git` (usually pre-installed)
+  - `Pipeline: Stage View` (usually pre-installed)
+  - **`Pipeline Utility Steps`** ⭐ **REQUIRED** - Provides `readYaml` function
+
+### Installing Required Plugins
+
+If you encounter `NoSuchMethodError: No such DSL method 'readYaml'`, install the missing plugin:
+
+1. Go to **"Manage Jenkins"** → **"Manage Plugins"**
+2. Click **"Available"** tab
+3. Search for: **`Pipeline Utility Steps`**
+4. Check the box and click **"Install without restart"**
+5. Verify installation by running your pipeline again
 
 ## 🔧 Step 1: Configure Jenkins Shared Library
 
@@ -309,7 +323,16 @@ You can use multiple shared libraries:
    - Verify YAML syntax is correct
    - Check Jenkins logs for detailed errors
 
-5. **Team configuration not found**
+5. **`readYaml` function not found (CRITICAL)**
+   - **Symptoms**: `NoSuchMethodError: No such DSL method 'readYaml' found`
+   - **Cause**: Missing `Pipeline Utility Steps` plugin
+   - **Solution**: Install the plugin:
+     1. Go to "Manage Jenkins" → "Manage Plugins"
+     2. Search for "Pipeline Utility Steps" in Available tab
+     3. Install and restart Jenkins if needed
+     4. Retry your pipeline
+
+6. **Team configuration not found**
    - Ensure `teams/{team}/markup.yml` files exist in your repository
    - Check that the team name parameter matches the directory name
 
