@@ -40,6 +40,8 @@ try {
         // Option 1: Using Harness expression to get file content
         // The file content will be resolved by Harness before script execution
         def globalConfigText = '<+fileStore.getAsString("config/global.yml")>'
+        echo "globalConfigText:"
+        echo "${globalConfigText}"
         
         // Check if Harness resolved the expression (if not, it will still contain '<+')
         if (globalConfigText.startsWith('<+')) {
@@ -76,7 +78,7 @@ try {
     try {
         // Access team config from File Store
         def teamConfigText = "<+fileStore.getAsString(\"teams/${team}/markup.yml\")>"
-        
+        echo "teamConfigText : ${teamConfigText}"
         if (teamConfigText.startsWith('<+')) {
             echo "⚠️ Team config File Store expression not resolved"
             throw new Exception("Team File Store expression not resolved")
