@@ -5,7 +5,7 @@ common:
   environment: "staging"
   
   # Team-specific email settings
-  emailTo: "frontend-team@company.com"
+  emailTo: "frontend-updated-team@company.com"
   emailSubject: "Frontend Build: ${appName} - ${environment}"
   
   # Team build settings
