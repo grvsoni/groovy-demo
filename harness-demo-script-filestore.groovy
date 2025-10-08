@@ -17,15 +17,15 @@ def echo(message) {
 }
 
 // Configuration - modify these values for your use case
-def team = "frontend"
-def suite = "ui-tests" 
-def test = "smoke-test"
+// def team = "frontend"
+// def suite = "ui-tests" 
+// def test = "smoke-test"
 def customParams = [:]
 
 // You can also use Harness variables like:
-// def team = '<+pipeline.variables.team>'
-// def suite = '<+pipeline.variables.suite>'
-// def test = '<+pipeline.variables.test>'
+def team = '<+pipeline.variables.team>'
+def suite = '<+pipeline.variables.suite>'
+def test = '<+pipeline.variables.test>'
 
 echo "=" * 60
 echo "🚀 HARNESS DEMO SCRIPT EXECUTION (WITH FILE STORE)"
