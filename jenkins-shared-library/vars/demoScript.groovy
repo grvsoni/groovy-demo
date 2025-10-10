@@ -13,6 +13,11 @@
  * @param test - Test name (smoke-test, regression-test, service-test, etc.)
  * @param customParams - Optional map of custom parameters to override defaults
  */
+
+def echo(message) {
+    println message
+}
+
 def call(Map args) {
     // Validate required parameters
     def team = args.team
