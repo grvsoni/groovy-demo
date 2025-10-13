@@ -15,7 +15,7 @@
  */
 import groovy.json.JsonOutput
 import org.yaml.snakeyaml.Yaml
-import static Util.*
+import static Utils.*
 
 def call(Map args) {
     // Validate required parameters
