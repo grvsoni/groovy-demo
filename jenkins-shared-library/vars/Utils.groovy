@@ -1,7 +1,7 @@
 import groovy.json.JsonOutput
 import org.yaml.snakeyaml.Yaml
 
-Class Utils {
+class Utils {
     // Emulation of Jenkins writeJSON step
     static def writeJSON(Map params) {
         def jsonContent = JsonOutput.toJson(params.json)
